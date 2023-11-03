@@ -4,9 +4,10 @@ console.log('Kozub');
 // task 3
 let dateNow = new Date();
 let grettings = 'Hi, I am ' + 'Vsevolod Kozub';
-alert(`${dateNow} ${grettings}`);
+let message = () => `${dateNow} ${grettings}`;
+alert(message());
 [dateNow, grettings] = [grettings, dateNow];
-alert(`${dateNow} ${grettings}`);
+alert(message());
 
 // task 4
 let properties = {
