@@ -26,14 +26,12 @@ console.log(isAdult);
 let myFirtLastGroupInfo = 'Vsevolod Kozub JavaScript for TA [Q4, 2023]';
 let myYearDob = 1982;
 let myMaritalStatus = false;
-let myBikes = null;
-let myCars;
 let myFirtLastGroupInfoType = typeof(myFirtLastGroupInfo);
 let myYearDobType = typeof(myYearDob);
 let myMaritalStatusType = typeof(myMaritalStatus);
-console.log(myYearDob);
-console.log(myMaritalStatus);
-console.log(myFirtLastGroupInfo);
+console.log(`${myYearDob}, ${myMaritalStatus}, ${myFirtLastGroupInfo}`);
+let myBikes = null;
+let myCars;
 console.log('My bikes variable type is: ' + typeof(myBikes));
 console.log('My cars variable type is: ' + typeof(myCars));
 
