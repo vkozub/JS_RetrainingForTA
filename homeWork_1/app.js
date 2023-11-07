@@ -31,8 +31,10 @@ let arrayOfData = [myFirtLastGroupInfo, myYearDob, myMaritalStatus];
 function compareByType(value1, value2) {
     if (typeof(value2) === 'string') {
         return -1;
+    } else if (typeof(value1) === 'string') {
+        return 1;
     };
-    return (typeof(value1) === 'number') ? -1 : ((typeof(value1) === 'boolean') ? 1 : -1);
+    return (typeof(value1) === 'number') ? -1 : 1;
 } 
 let [number, boolean, string] = arrayOfData.sort(compareByType);
 // logging the sorted values
