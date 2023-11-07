@@ -27,7 +27,7 @@ let myFirtLastGroupInfo = 'Vsevolod Kozub JavaScript for TA [Q4, 2023]';
 let myYearDob = 1982;
 let myMaritalStatus = false;
 let arrayOfData = [myFirtLastGroupInfo, myYearDob, myMaritalStatus];
-// declare simple function to sort by Type
+// declare simple function to sort by Type, it works only if there is no Type duplication
 function compareByType(value1, value2) {
     if (typeof(value2) === 'string') {
         return -1;
