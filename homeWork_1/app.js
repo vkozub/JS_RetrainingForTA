@@ -26,10 +26,17 @@ console.log(isAdult);
 let myFirtLastGroupInfo = 'Vsevolod Kozub JavaScript for TA [Q4, 2023]';
 let myYearDob = 1982;
 let myMaritalStatus = false;
-let myFirtLastGroupInfoType = typeof(myFirtLastGroupInfo);
-let myYearDobType = typeof(myYearDob);
-let myMaritalStatusType = typeof(myMaritalStatus);
-console.log(`${myYearDob}, ${myMaritalStatus}, ${myFirtLastGroupInfo}`);
+let arrayOfData = [myFirtLastGroupInfo, myYearDob, myMaritalStatus];
+// declare simple function to sort by Type
+function compareByType(value1, value2) {
+    if (typeof(value2) === 'string') {
+        return -1;
+    };
+    return (typeof(value1) === 'number') ? -1 : ((typeof(value1) === 'boolean') ? 1 : -1);
+} 
+let [number, boolean, string] = arrayOfData.sort(compareByType);
+// logging the sorted values
+console.log(`Number: ${number}, Boolean: ${boolean}, String: ${string}.`);
 let myBikes = null;
 let myCars;
 console.log('My bikes variable type is: ' + typeof(myBikes));
