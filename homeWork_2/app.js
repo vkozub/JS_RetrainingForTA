@@ -44,4 +44,18 @@ let message = (isAdult < 18) ? 'You are still too young' : 'You have reached the
 alert(message);
 
 // task 6
-  
+function isValidValues() {
+    if (isNaN(side1) || isNaN(side2) || isNaN(side3)) { return false; }
+    return true;
+}
+let side1 = parseFloat(prompt('Enter the length of the first side of the triangle'));
+let side2 = parseFloat(prompt('Enter the length of the second side of the triangle'));
+let side3 = parseFloat(prompt('Enter the length of the third side of the triangle'));
+let calculateAreaOfTriangle = function(a, b, c) {
+    if (!isValidValues()) { return 'Incorrect data'; };
+    let halfOfPerimeter = (a + b + c)/2;
+    let area = Math.sqrt(halfOfPerimeter*(halfOfPerimeter - a)*(halfOfPerimeter - b)*(halfOfPerimeter - c));
+    return Math.round(area);
+}
+console.log(calculateAreaOfTriangle(side1, side2, side3));
+
