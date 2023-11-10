@@ -33,4 +33,9 @@ document.body.innerHTML += `<h2>The 5th element is: ${userValue}</>`;
 array.shift()
 document.body.innerHTML += `<i>[${array}]</>`;
 
-//task 4
+// task 4
+let cities = ['Rome', 'Lviv', 'Warsaw'];
+let citiesRibbon = cities.join('*');
+console.log(citiesRibbon);
+
+// task 5
