@@ -39,3 +39,9 @@ let citiesRibbon = cities.join('*');
 console.log(citiesRibbon);
 
 // task 5
+let isAdult = +prompt('How old are you?');
+let message = (isAdult < 18) ? 'You are still too young' : 'You have reached the age of majority';
+alert(message);
+
+// task 6
+  
