@@ -55,7 +55,7 @@ let calculateAreaOfTriangle = function(a, b, c) {
     if (!isValidValues()) { return 'Incorrect data'; };
     let halfOfPerimeter = (a + b + c)/2;
     let area = Math.sqrt(halfOfPerimeter*(halfOfPerimeter - a)*(halfOfPerimeter - b)*(halfOfPerimeter - c));
-    return Math.round(area);
+    return area.toFixed(3);
 }
 console.log(calculateAreaOfTriangle(side1, side2, side3));
 
