@@ -45,7 +45,8 @@ alert(message);
 
 // task 6
 function isValidValues() {
-    if (isNaN(side1) || isNaN(side2) || isNaN(side3)) { return false; }
+    if (isNaN(side1) || isNaN(side2) || isNaN(side3)) { return false; }; // verifying numbers
+    if (((side1 + side2) <= side3) || ((side1 + side3) <= side2) || ((side2 + side3) <= side1)) { return false; }; // verifying existing of triangle
     return true;
 }
 let side1 = parseFloat(prompt('Enter the length of the first side of the triangle'));
