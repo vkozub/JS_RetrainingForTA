@@ -49,16 +49,17 @@ function isNumbers() { return !(isNaN(side1) || isNaN(side2) || isNaN(side3)); }
 // verifying existing of triangle
 function isExistTriangle() { return (((side1 + side2) > side3) && ((side1 + side3) > side2) && ((side2 + side3) > side1)); }
 // verifying whether triangle is valid as geometric figure - using Theorem of Cosines
-function isMeetTheoremOfCosines() {
+function isRectangleTriangle() {
     let angleA = Math.acos((side1*side1 + side3*side3 - side2*side2)/(2*side1*side3));
     let angleB = Math.acos((side1*side1 + side2*side2 - side3*side3)/(2*side1*side2));
     let angleC = Math.acos((side2*side2 + side3*side3 - side1*side1)/(2*side2*side3));
-    console.log(parseFloat(((angleA + angleB + angleC)*(180/Math.PI)).toFixed(2)));
-    let isSumCorrect = (parseFloat(((angleA + angleB + angleC)*(180/Math.PI)).toFixed(2)) === 180.00) ? true : false;
-    return isSumCorrect;
+    let toDegrees = function(angle) { return parseFloat((angle*(180/Math.PI)).toFixed(2)); };
+    console.log(toDegrees(angleA), toDegrees(angleB), toDegrees(angleC));
+    let isRectangle = ((toDegrees(angleA) === 90.00) || (toDegrees(angleB) === 90.00) || (toDegrees(angleC) === 90.00)) ? true : false;
+    return isRectangle;
 }
 function isValidTriangle() {
-    return (isNumbers() && isExistTriangle() && isMeetTheoremOfCosines());
+    return (isNumbers() && isExistTriangle());
 }
 let side1 = parseFloat(prompt('Enter the length of the first side of the triangle'));
 let side2 = parseFloat(prompt('Enter the length of the second side of the triangle'));
@@ -67,7 +68,7 @@ let calculateAreaOfTriangle = function(a, b, c) {
     if (!isValidTriangle()) { return 'Incorrect data'; };
     let halfOfPerimeter = (a + b + c)/2;
     let area = Math.sqrt(halfOfPerimeter*(halfOfPerimeter - a)*(halfOfPerimeter - b)*(halfOfPerimeter - c));
-    return area.toFixed(3);
+    return [area.toFixed(3), `Trianlge is rectangular: ${isRectangleTriangle()}`];
 }
-console.log(calculateAreaOfTriangle(side1, side2, side3));
+console.log(...calculateAreaOfTriangle(side1, side2, side3));
 
