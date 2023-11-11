@@ -72,3 +72,12 @@ let calculateAreaOfTriangle = function(a, b, c) {
 }
 console.log(...calculateAreaOfTriangle(side1, side2, side3));
 
+// task 7
+let dateNow = new Date();
+let timeInHours = dateNow.getHours();
+if (timeInHours < 5 && timeInHours >= 23) { alert('Good night!');
+} else if (timeInHours >= 5 && timeInHours < 11) { alert('Good morning!'); 
+} else if (timeInHours >= 11 && timeInHours < 17) { alert('Good day!'); 
+} else { alert('Good evening!'); };
+console.log(`Now is ${timeInHours + 1}th hour of the day`);
+
