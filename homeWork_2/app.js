@@ -18,7 +18,10 @@ console.log(res4);
 console.log(typeof res4);
 
 // task 2
-
+let promptedNumber = parseInt(prompt('Enter integer number'));
+let isPositive = promptedNumber > 0;
+let isMulipleOfSeven = (promptedNumber%7 === 0);
+console.log(`The number is positive: ${isPositive}, The Number is multiple of 7: ${isMulipleOfSeven}.`);
 
 // task 3
 let array = new Array();
