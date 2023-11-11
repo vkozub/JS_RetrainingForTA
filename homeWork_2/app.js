@@ -98,5 +98,7 @@ switch(true) {
 };
 
 // using ternary if
-let greetings = (timeInHours < 5 && timeInHours >= 23) ? 'Good night!' : ((timeInHours >= 5 && timeInHours < 11) ? 'Good morning!' : ((timeInHours >= 11 && timeInHours < 17) ? 'Good day!' : 'Good evening!'));
+let greetings = (timeInHours < 5 && timeInHours >= 23) ? 'Good night!' : 
+                ((timeInHours >= 5 && timeInHours < 11) ? 'Good morning!' : 
+                ((timeInHours >= 11 && timeInHours < 17) ? 'Good day!' : 'Good evening!'));
 console.log(greetings);
