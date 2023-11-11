@@ -75,9 +75,28 @@ console.log(...calculateAreaOfTriangle(side1, side2, side3));
 // task 7
 let dateNow = new Date();
 let timeInHours = dateNow.getHours();
+// using if 
 if (timeInHours < 5 && timeInHours >= 23) { alert('Good night!');
 } else if (timeInHours >= 5 && timeInHours < 11) { alert('Good morning!'); 
 } else if (timeInHours >= 11 && timeInHours < 17) { alert('Good day!'); 
 } else { alert('Good evening!'); };
 console.log(`Now is ${timeInHours + 1}th hour of the day`);
 
+// using switch
+switch(true) {
+    case (timeInHours < 5 && timeInHours >= 23):
+        console.log('Good night!');
+        break;
+    case (timeInHours >= 5 && timeInHours < 11):
+        console.log('Good morning!');
+        break;
+    case (timeInHours >= 11 && timeInHours < 17):
+        console.log('Good day!');
+        break;
+    default:
+        console.log('Good evening!');
+};
+
+// using ternary if
+let greetings = (timeInHours < 5 && timeInHours >= 23) ? 'Good night!' : ((timeInHours >= 5 && timeInHours < 11) ? 'Good morning!' : ((timeInHours >= 11 && timeInHours < 17) ? 'Good day!' : 'Good evening!'));
+console.log(greetings);
