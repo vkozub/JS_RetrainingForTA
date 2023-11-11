@@ -48,7 +48,7 @@ alert(message);
 function isNumbers() { return !(isNaN(side1) || isNaN(side2) || isNaN(side3)); }
 // verifying existing of triangle
 function isExistTriangle() { return (((side1 + side2) > side3) && ((side1 + side3) > side2) && ((side2 + side3) > side1)); }
-// verifying whether triangle is valid as geometric figure - using Theorem of Cosines
+// whether the triangle being rectangular
 function isRectangleTriangle() {
     let angleA = Math.acos((side1*side1 + side3*side3 - side2*side2)/(2*side1*side3));
     let angleB = Math.acos((side1*side1 + side2*side2 - side3*side3)/(2*side1*side2));
