@@ -24,3 +24,11 @@ function randArray(k) {
 console.log(randArray(10));
 
 // task 4
+let base = parseInt(prompt("Enter the base value"));
+let exponent = parseInt(prompt("Enter the exponent value"));
+function raiseToDegree(a, b) {
+    return Math.pow(a, b);
+}
+console.log(base, exponent, raiseToDegree(base, exponent));
+
+// task 5
