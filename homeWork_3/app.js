@@ -41,3 +41,27 @@ function findMin() {
 console.log(`The minimum is: ${findMin(...randValues)}`);
 
 // task 6
+const arrayOfData = [1, 2, 3, 4, 5, 5];
+function isUnique(ary) {
+    let value = ary.shift(); // remove first element not to iterate over again and not to compare with itself
+    console.log(value, ary);
+    for (let i in ary) {
+        if (value === ary[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+let findUnique = function(arr) {
+    let ary = [...arr];
+    let result;
+    for (let i in arr) {
+        result = isUnique(ary);
+        if (!result) { return false; };
+    };
+    return result;
+};
+console.log(arrayOfData);
+console.log(findUnique(arrayOfData));
+
+// task 7
