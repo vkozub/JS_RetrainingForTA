@@ -16,3 +16,11 @@ for (let i = 0; i < 15; i++) {
 }
 
 // task 3
+function randArray(k) {
+    const array = [];
+    for (let i = 0; i < k; i++) { array.push(Math.round(Math.random()*500)); };
+    return array;
+}
+console.log(randArray(10));
+
+// task 4
