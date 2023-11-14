@@ -32,3 +32,12 @@ function raiseToDegree(a, b) {
 console.log(base, exponent, raiseToDegree(base, exponent));
 
 // task 5
+// reusing function randArray(k) declared in task 3 as input values
+let randValues = randArray(10);
+console.log(...randValues);
+function findMin() {
+    return Math.min(...arguments);
+}
+console.log(`The minimum is: ${findMin(...randValues)}`);
+
+// task 6
