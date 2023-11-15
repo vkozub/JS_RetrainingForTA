@@ -61,3 +61,15 @@ console.log(arrayOfNum);
 console.log(`Array has got only unique values: ${findUnique(arrayOfNum)}`);
 
 // task 7
+
+
+// task 8
+let inputString = prompt("Enter a string");
+let stringToUppercase = function(string) {
+    let uppercased = '';
+    for (let i of string) {
+        uppercased += i.toUpperCase();
+    };
+    return uppercased;
+};
+console.log(stringToUppercase(inputString));
