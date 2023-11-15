@@ -41,27 +41,25 @@ function findMin() {
 console.log(`The minimum is: ${findMin(...randValues)}`);
 
 // task 6
-const arrayOfData = [1, 2, 3, 4, 5, 5];
-function isUnique(ary) {
-    let value = ary.shift(); // remove first element not to iterate over again and not to compare with itself
-    console.log(value, ary);
-    for (let i in ary) {
-        if (value === ary[i]) {
-            return false;
-        }
-    }
-    return true;
-}
+// using closure and recursion
+const arrayOfNum = [1, 22, 3, 4, 5];
 let findUnique = function(arr) {
-    let ary = [...arr];
-    let result;
-    for (let i in arr) {
-        result = isUnique(ary);
-        if (!result) { return false; };
+        let ary = [...arr]; // copy initial array not to change it
+        let value; // initialize value to compare
+        let verifyEquity = () => {
+            if (ary.length <= 1) { return true; }; // if array contains 1 or 0 values return true immediately
+            value = ary.shift(); // remove first element not to iterate over again and not to compare with itself
+            console.log(value, ary);
+            for (let i of ary) {
+                if (value === i) {
+                    return false;
+                };
+            };
+            return verifyEquity();
+        };
+        return verifyEquity();
     };
-    return result;
-};
-console.log(arrayOfData);
-console.log(findUnique(arrayOfData));
+console.log(arrayOfNum);
+console.log(`Array has got only unique values: ${findUnique(arrayOfNum)}`);
 
 // task 7
