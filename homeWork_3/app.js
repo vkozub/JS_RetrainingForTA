@@ -42,18 +42,16 @@ console.log(`The minimum is: ${findMin(...randValues)}`);
 
 // task 6
 // using closure and recursion
-const arrayOfNum = [1, 22, 3, 4, 5];
+const arrayOfNum = [1, 22, 3, 3, 4, 5];
 let findUnique = function(arr) {
-        let ary = [...arr]; // copy initial array not to change it
-        let value; // initialize value to compare
+        let ary = [...arr];                        // copy initial array not to change it
+        let value;
         let verifyEquity = () => {
             if (ary.length <= 1) { return true; }; // if array contains 1 or 0 values return true immediately
-            value = ary.shift(); // remove first element not to iterate over again and not to compare with itself
+            value = ary.shift();                   // remove first element not to iterate over again and not to compare with itself
             console.log(value, ary);
             for (let i of ary) {
-                if (value === i) {
-                    return false;
-                };
+                if (value === i) { return false; };
             };
             return verifyEquity();
         };
