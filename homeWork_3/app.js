@@ -64,9 +64,10 @@ console.log(`Array has got only unique values: ${findUnique(arrayOfNum)}`);
 // assumption: using only positive numbers to output the result, if number is negative then outputting whole array
 let array7 = randArray(8);
 let numToDisplay = parseInt(prompt('Enter the displayed numbers of array'));
-let showArrayValues = function(array, num) {
+numToDisplay = numToDisplay || 1;
+let showArrayValues = function(array, num = 1) {
     let arLenght = array.length;
-    if (num < 1 || num >= arLenght) { return array.slice(); 
+    if (num < 0 || num >= arLenght) { return array.slice(); 
     } else {
         return array.slice(-num);
     }
