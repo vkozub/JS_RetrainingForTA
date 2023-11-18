@@ -32,3 +32,4 @@ function checkAge(age) {
 checkAge(age);
 
 // task 3
+let f = 'ds';
