@@ -55,3 +55,28 @@ let month = parseInt(prompt("Enter a month"));
 console.log(showMonthName(month));
 
 // task 4
+function showUser(userId) {
+    try {
+        if (userId < 0) { 
+            throw new Error("ID cannot be negative");
+        } else {
+            return { id: userId };
+        };
+    } catch (e) {
+        return e;
+    };
+}
+function showUsers(ids) {
+    let users = [];
+    for (let id of ids) {
+        let userObject = showUser(id);
+        if (userObject instanceof Error) {
+            console.log(userObject.name + ': ' + userObject.message + ': ' + id);
+        } else {
+            users.push(userObject);
+        };
+    };
+    return users;
+}
+const ids = [1, 2, -3, 99, 0, 100, -123];
+console.log(showUsers(ids));
