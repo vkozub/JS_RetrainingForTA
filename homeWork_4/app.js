@@ -51,7 +51,7 @@ function showMonthName(month) {
         console.log(e);
     };
 }
-let month = parseInt(prompt("Enter a month"));
+let month = parseInt(prompt("Enter a month number"));
 console.log(showMonthName(month));
 
 // task 4
