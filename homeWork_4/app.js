@@ -32,4 +32,26 @@ function checkAge(age) {
 checkAge(age);
 
 // task 3
-let f = 'ds';
+class MonthException extends Error {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+    }
+}
+function showMonthName(month) {
+    try {
+        if ((month <= 0) || (month > 12)) { 
+            throw new MonthException("Incorrect month number!");
+        } else {
+            let date = new Date();
+            date.setMonth(month - 1);
+            return date.toLocaleString('en-US', { month: 'long' });
+        };
+    } catch (e) {
+        console.log(e);
+    };
+}
+let month = parseInt(prompt("Enter a month"));
+console.log(showMonthName(month));
+
+// task 4
