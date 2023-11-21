@@ -13,6 +13,11 @@ let car = {
 console.log(propsCount(car));
 
 // **************************** Task 2 ****************************
+// reuse object 'car'
+function showProps(obj) {
+    return Object.entries(obj);
+}
+console.log(showProps(car));
 
 // **************************** Task 3 ****************************
 
