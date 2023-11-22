@@ -99,3 +99,43 @@ for (const worker of workersSorted) {
 };
 
 // **************************** Task 5 ****************************
+class GeometricFigure {
+    getArea() {}
+    toString() { return this.constructor.name; }
+}
+class Circle extends GeometricFigure {
+    constructor(radius) {
+        super();
+        this.radius = radius;
+    }
+    getArea() { return Math.PI * this.radius * this.radius; }
+}
+class Square extends GeometricFigure {
+    constructor(side) {
+        super();
+        this.side = side;
+    }
+    getArea() { return this.side * this.side; }
+}
+class Triangle extends GeometricFigure {
+    constructor(sideA, sideB, sideC) {
+        super();
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.sideC = sideC;
+    }
+    getArea() {
+        const s = (this.sideA + this.sideB + this.sideC) / 2;
+        return Math.sqrt(s * (s - this.sideA) * (s - this.sideB) * (s - this.sideC));
+    }
+}
+function handleFigures(figures) {
+    const totalArea = figures.reduce((total, figure) => total + figure.getArea(), 0);
+    for (const figure of figures) {
+        console.log('Geometric figure: ' + figure.toString() + ' - area: ' + figure.getArea());
+
+    }
+    console.log('Total area: '+ totalArea);
+}
+const figures = [new Circle(2.5), new Square(5), new Triangle(5, 5, 5)];
+console.log(handleFigures(figures));
