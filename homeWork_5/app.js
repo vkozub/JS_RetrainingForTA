@@ -1,4 +1,5 @@
 // **************************** Task 1 ****************************
+
 function propsCount(obj) {
     return Object.keys(obj).length;
 }
@@ -13,6 +14,7 @@ let car = {
 console.log(propsCount(car));
 
 // **************************** Task 2 ****************************
+
 // reuse object 'car'
 function showProps(obj) {
     return Object.entries(obj);
@@ -20,6 +22,7 @@ function showProps(obj) {
 console.log(showProps(car));
 
 // **************************** Task 3 ****************************
+
 class Person {
     constructor(name, surname) {
         this.name = name;
@@ -59,6 +62,7 @@ console.log(student.showFullName('Anatoliyovych'));
 console.log('Current course: ' + student.showCourse);
 
 // **************************** Task 4 ****************************
+
 class Worker {
     #experience = 1.2;
     constructor(fullName, dayRate, workingDays) {
@@ -99,6 +103,7 @@ for (const worker of workersSorted) {
 };
 
 // **************************** Task 5 ****************************
+
 class GeometricFigure {
     getArea() {}
     toString() { return Object.getPrototypeOf(this).constructor.name; }
