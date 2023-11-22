@@ -38,7 +38,7 @@ class Student extends Person {
         return `${this.name} ${middleName} ${this.surname}`;
     }
     get showCourse() {
-        return this._admYear;
+        return this._course;
     }
     set showCourse(year) {
         const nowYear = (new Date).getFullYear();
@@ -47,10 +47,10 @@ class Student extends Person {
                 throw new Error('You are not the student anymore');
             } else if (year > nowYear) { // verify year whether less than current
                 throw new Error('You are not the student yet');
-            } else { this._admYear = (nowYear - year + 1); }
+            } else { this._course = (nowYear - year + 1); }
         } catch(e) { 
             console.log(e.message);
-            this._admYear = null; // setting null value in case invalid data
+            this._course = null; // setting null value in case invalid data
         };  
     }
 }
