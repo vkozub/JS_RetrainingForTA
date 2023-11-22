@@ -101,7 +101,7 @@ for (const worker of workersSorted) {
 // **************************** Task 5 ****************************
 class GeometricFigure {
     getArea() {}
-    toString() { return this.constructor.name; }
+    toString() { return Object.getPrototypeOf(this).constructor.name; }
 }
 class Circle extends GeometricFigure {
     constructor(radius) {
