@@ -59,4 +59,43 @@ console.log(student.showFullName('Anatoliyovych'));
 console.log('Current course: ' + student.showCourse);
 
 // **************************** Task 4 ****************************
+class Worker {
+    #experience = 1.2;
+    constructor(fullName, dayRate, workingDays) {
+        this.fullName = fullName;
+        this.dayRate = dayRate;
+        this.workingDays = workingDays;
+    }
+    get experience() { return this.#experience; }
+    set experience(value) { this.#experience = value; }
+    showSalary() {
+        return this.dayRate * this.workingDays;
+    }
+    showSalaryWithExperience() {
+        return this.#experience * this.showSalary();
+    }
+}
+function sortBySalaryWithExp(a, b) {
+    return a.showSalaryWithExperience() - b.showSalaryWithExperience();
+}
+const workers = [];
+workers.push(new Worker('Vsevolod Kozub', 100, 10));
+workers.push(new Worker('Taras Lavruk', 150, 30));
+workers.push(new Worker('Facundo Mayon', 200, 29));
+workers.push(new Worker('Jake Magin', 500, 28));
+for (const worker of workers) {
+    console.log(worker.fullName);
+    console.log(worker.fullName + ' salary: ' + worker.showSalary());
+    console.log('New experience: ' + worker.experience);
+    console.log(worker.fullName + ' salary: ' + worker.showSalaryWithExperience());
+    worker.experience = 1.5;
+    console.log('New experience: ' + worker.experience);
+    console.log(worker.fullName + ' salary: ' + worker.showSalaryWithExperience());
+};
+let workersSorted = workers.toSorted(sortBySalaryWithExp);
+console.log('Sorted salary:');
+for (const worker of workersSorted) {
+    console.log(worker.fullName + ' ' + worker.showSalaryWithExperience());
+};
 
+// **************************** Task 5 ****************************
