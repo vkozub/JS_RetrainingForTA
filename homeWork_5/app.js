@@ -79,28 +79,46 @@ class Worker {
         return this.#experience * this.showSalary();
     }
 }
-function sortBySalaryWithExp(a, b) {
-    return a.showSalaryWithExperience() - b.showSalaryWithExperience();
+
+// Initialize 'Department' class which contains all workers and methods related to workers of the Department
+
+class Department {
+    constructor(workers) {
+        this.workers = workers;
+    }
+    showDepList() { // show list of workers of the Department
+        for (const worker of this.workers) {
+            console.log(worker.fullName);
+            console.log(worker.fullName + ' salary: ' + worker.showSalary());
+            console.log('New experience: ' + worker.experience);
+            console.log(worker.fullName + ' salary: ' + worker.showSalaryWithExperience());
+            worker.experience = 1.5;
+            console.log('New experience: ' + worker.experience);
+            console.log(worker.fullName + ' salary: ' + worker.showSalaryWithExperience());
+        };
+    }
+    sortDepBySalaryWithExp() { // show list of workers sorted by salary with experience
+        let workersSorted = this.workers.toSorted(this.sortBySalaryWithExp);
+        console.log('Sorted salary:');
+        for (const worker of workersSorted) {
+            console.log(worker.fullName + ' ' + worker.showSalaryWithExperience());
+        };
+    }
+    // method which is called when we need to sort by salary with experience
+    sortBySalaryWithExp(a, b) {
+        return a.showSalaryWithExperience() - b.showSalaryWithExperience();
+    }
 }
+
 const workers = [];
 workers.push(new Worker('Vsevolod Kozub', 100, 10));
 workers.push(new Worker('Taras Lavruk', 150, 30));
 workers.push(new Worker('Facundo Mayon', 200, 29));
 workers.push(new Worker('Jake Magin', 500, 28));
-for (const worker of workers) {
-    console.log(worker.fullName);
-    console.log(worker.fullName + ' salary: ' + worker.showSalary());
-    console.log('New experience: ' + worker.experience);
-    console.log(worker.fullName + ' salary: ' + worker.showSalaryWithExperience());
-    worker.experience = 1.5;
-    console.log('New experience: ' + worker.experience);
-    console.log(worker.fullName + ' salary: ' + worker.showSalaryWithExperience());
-};
-let workersSorted = workers.toSorted(sortBySalaryWithExp);
-console.log('Sorted salary:');
-for (const worker of workersSorted) {
-    console.log(worker.fullName + ' ' + worker.showSalaryWithExperience());
-};
+
+let laborDepartment = new Department(workers);
+laborDepartment.showDepList();
+laborDepartment.sortDepBySalaryWithExp();
 
 // **************************** Task 5 ****************************
 
