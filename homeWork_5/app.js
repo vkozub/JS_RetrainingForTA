@@ -98,7 +98,7 @@ class Department {
         };
     }
     sortDepBySalaryWithExp() { // show list of workers sorted by salary with experience
-        let workersSorted = this.workers.toSorted(this.sortBySalaryWithExp);
+        const workersSorted = this.workers.toSorted(this.sortBySalaryWithExp);
         console.log('Sorted salary:');
         for (const worker of workersSorted) {
             console.log(worker.fullName + ' ' + worker.showSalaryWithExperience());
@@ -116,7 +116,7 @@ workers.push(new Worker('Taras Lavruk', 150, 30));
 workers.push(new Worker('Facundo Mayon', 200, 29));
 workers.push(new Worker('Jake Magin', 500, 28));
 
-let laborDepartment = new Department(workers);
+const laborDepartment = new Department(workers);
 laborDepartment.showDepList();
 laborDepartment.sortDepBySalaryWithExp();
 
