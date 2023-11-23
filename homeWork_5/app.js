@@ -101,7 +101,7 @@ class Department {
         const workersSorted = this.workers.toSorted(this.sortBySalaryWithExp);
         console.log('Sorted salary:');
         for (const worker of workersSorted) {
-            console.log(worker.fullName + ' ' + worker.showSalaryWithExperience());
+            console.log(worker.fullName + ': ' + worker.showSalaryWithExperience());
         };
     }
     // method which is called when we need to sort by salary with experience
