@@ -75,6 +75,3 @@ input2.value = prompt2;
 console.log(input1.value, input2.value);
 [input1.value, input2.value] = [prompt2, prompt1];
 console.log(input1.value, input2.value);
-
-// **************************** Task 7 ****************************
-
