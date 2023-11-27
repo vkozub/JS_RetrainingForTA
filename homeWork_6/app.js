@@ -21,9 +21,7 @@ alert(image.outerHTML);
 
 const paragraphs = document.querySelectorAll('div#text > p');
 const parArray = Array.from(paragraphs); // nodeList to array
-for ( let i = 0; i < parArray.length; i++ ) {
-    console.log('Selector text ' + `${i}: ` + parArray[i].textContent);
-}
+parArray.forEach((value, i) => { console.log('Selector text ' + `${i}: ` + value.textContent); });
 
 // **************************** Task 4 ****************************
 
