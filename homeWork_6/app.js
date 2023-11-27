@@ -44,3 +44,26 @@ alert(l0 + ', ' + l4 + ', ' + l1 + ', ' + l3 + ', ' + l2);
 
 // **************************** Task 5 ****************************
 
+const h1 = document.getElementsByTagName('h1')[0];
+h1.style.backgroundColor = 'green';
+
+const span = document.getElementsByTagName('span')[0];
+span.style.display = 'none';
+
+const _ul3 = document.querySelectorAll('ul#myList > li');
+const ul3 = Array.from(_ul3);
+ul3.forEach((value) => { 
+    value.style.float = 'left';
+    value.style.margin = '0 20px 0 0';
+});
+
+const _p3 = document.querySelectorAll('div#myDiv > p');
+const p3 = Array.from(_p3);
+p3[0].style['font-weight'] = 'bold';
+p3[1].style['color'] = 'red';
+p3[2].style['text-decoration'] = 'underline';
+p3[3].style['font-style'] = 'italic';
+
+// **************************** Task 6 ****************************
+
+// **************************** Task 7 ****************************
