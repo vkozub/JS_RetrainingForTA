@@ -66,4 +66,15 @@ p3[3].style['font-style'] = 'italic';
 
 // **************************** Task 6 ****************************
 
+const prompt1 = prompt('Message 1');
+const prompt2 = prompt('Message 2');
+const input1 = document.getElementById('input1');
+const input2 = document.getElementById('input2');
+input1.value = prompt1;
+input2.value = prompt2;
+console.log(input1.value, input2.value);
+[input1.value, input2.value] = [prompt2, prompt1];
+console.log(input1.value, input2.value);
+
 // **************************** Task 7 ****************************
+
