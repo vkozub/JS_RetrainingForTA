@@ -11,6 +11,11 @@ test2.innerHTML = 'Last';
 let divs = document.getElementsByTagName('div');
 divs[0].innerHTML = 'Last';
 
+// the fourth way
+const children = Array.from(document.body.children);
+const div2 = children.find(child => child.id === 'test');
+div2.textContent = 'Last';
+
 // **************************** Task 2 ****************************
 
 let image = document.querySelector('.image');
