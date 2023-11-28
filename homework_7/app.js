@@ -8,7 +8,14 @@ setTimeout(() => { newWin.close(); }, 6000);
 
 // ********************************** Task 2 ********************************
 
-
+const button = document.getElementsByTagName('button')[0];
+function changeCSS() {
+    const p = document.getElementById('text');
+    p.style.color = 'orange';
+    p.style.fontSize = '20px';
+    p.style.fontFamily = 'Comic Sans MS';
+};
+button.addEventListener('click', changeCSS);
 
 // ********************************** Task 3 ********************************
 
