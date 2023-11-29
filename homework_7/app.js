@@ -60,12 +60,12 @@ function liveButton(text){
         p = document.createElement('p');
         divLive.appendChild(p);
     }
-    return () => { p.innerHTML += text; }; 
+    return () => { p.innerHTML += (text + '<br>'); }; 
 }
 
-button5.addEventListener('click', liveButton('I was pressed!<br>'));
-button5.addEventListener('mouseout', liveButton('Mouse is not on me!<br>'));
-button5.addEventListener('mouseenter', liveButton('Mouse is on me!<br>'));
+button5.addEventListener('click', liveButton('I was pressed!'));
+button5.addEventListener('mouseout', liveButton('Mouse is not on me!'));
+button5.addEventListener('mouseenter', liveButton('Mouse is on me!'));
 
 // ********************************** Task 6 ********************************
 
