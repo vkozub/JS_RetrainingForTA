@@ -37,3 +37,17 @@ link1.addEventListener('mouseover', changeBackgroundColor('yellow'));
 link1.addEventListener('mouseout', changeBackgroundColor('white'));
 
 // ********************************** Task 4 ********************************
+
+const select1 = document.getElementById('select1');
+const button4 = document.getElementById('button4');
+
+button4.addEventListener('click', function(){
+    let selectValue = select1.value;
+    const _options = document.querySelectorAll('select#select1 > option');
+    const options = Array.from(_options);
+    const selected = options.find( (option) => option.value === selectValue );
+    if (selected) { selected.remove(); };
+});
+
+// ********************************** Task 5 ********************************
+
