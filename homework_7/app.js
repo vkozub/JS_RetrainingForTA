@@ -51,3 +51,21 @@ button4.addEventListener('click', function(){
 
 // ********************************** Task 5 ********************************
 
+const button5 = document.getElementById('button5');
+
+function liveButton(text){
+    const divLive = document.getElementById('live_button');
+    let p = document.querySelector('div#live_button > p');
+    if (!p) { 
+        p = document.createElement('p');
+        divLive.appendChild(p);
+    }
+    return () => { p.innerHTML += text; }; 
+}
+
+button5.addEventListener('click', liveButton('I was pressed!<br>'));
+button5.addEventListener('mouseout', liveButton('Mouse is not on me!<br>'));
+button5.addEventListener('mouseenter', liveButton('Mouse is on me!<br>'));
+
+// ********************************** Task 6 ********************************
+
