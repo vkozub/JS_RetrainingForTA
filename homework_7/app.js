@@ -8,7 +8,7 @@ setTimeout(() => { newWin.close(); }, 6000);
 
 // ********************************** Task 2 ********************************
 
-const button = document.getElementsByTagName('button')[0];
+const button = document.querySelector('button');
 function changeCSS() {
     const p = document.getElementById('text');
     p.style.color = 'orange';
