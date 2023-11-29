@@ -19,3 +19,21 @@ button.addEventListener('click', changeCSS);
 
 // ********************************** Task 3 ********************************
 
+const button1 = document.getElementById('button1');
+const button2 = document.getElementById('button2');
+const button3 = document.getElementById('button3');
+const link1 = document.getElementById('link1');
+
+function changeBackgroundColor(color){
+    const page = document.querySelector('body');
+    return () => { page.style.backgroundColor = color; }; 
+}
+
+button1.addEventListener('click', changeBackgroundColor('blue'));
+button2.addEventListener('dblclick', changeBackgroundColor('pink'));
+button3.addEventListener('mousedown', changeBackgroundColor('brown'));
+button3.addEventListener('mouseup', changeBackgroundColor('white'));
+link1.addEventListener('mouseover', changeBackgroundColor('yellow'));
+link1.addEventListener('mouseout', changeBackgroundColor('white'));
+
+// ********************************** Task 4 ********************************
