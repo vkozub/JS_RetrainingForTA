@@ -69,3 +69,12 @@ button5.addEventListener('mouseenter', liveButton('Mouse is on me!'));
 
 // ********************************** Task 6 ********************************
 
+const screen_size = document.getElementById('screen_size');
+function reportWindowSize() { 
+     screen_size.innerHTML = `Width: ${window.innerWidth}, Height: ${window.innerHeight}`;
+}
+reportWindowSize();
+window.addEventListener('resize', reportWindowSize);
+
+// ********************************** Task 7 ********************************
+
