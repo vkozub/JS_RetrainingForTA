@@ -78,3 +78,46 @@ window.addEventListener('resize', reportWindowSize);
 
 // ********************************** Task 7 ********************************
 
+const selectCountry = document.getElementById('select_country');
+const selectCity = document.getElementById('select_city');
+const selectedLocation = document.getElementById('selected_location');
+
+const USER_LOCATION = {  'USA': ['New-York', 'Chicago', 'San Francisco', 'Boston'],
+                         'Ukraine': ['Lviv', 'Ivano-Frankivsk', 'Odesa'],
+                         'UK': ['London', 'Birmingham', 'Oxford']
+                      };
+
+function populateCountries() {
+    const countries = Object.keys(USER_LOCATION);
+    countries.forEach( (c) => {
+        let option = document.createElement('option');
+        option.value = c;
+        option.textContent = c;
+        selectCountry.appendChild(option);
+    } );
+}
+function removeCityOptions() {
+    let cityOptions = document.querySelectorAll('select#select_city > option');
+    cityOptions.forEach((op) => op.remove());
+}
+function populateCities() {
+    removeCityOptions();
+    const countryCities = USER_LOCATION[selectCountry.value];
+    countryCities.forEach( (c) => {
+        let option = document.createElement('option');
+        option.value = c;
+        option.textContent = c;
+        selectCity.appendChild(option);
+    } );
+}
+function populateLabel() {
+    selectedLocation.textContent = `${selectCountry.value}, ${selectCity.value}`;
+}
+
+populateCountries();
+populateCities();
+populateLabel();
+
+selectCountry.addEventListener('change', populateCities);
+selectCountry.addEventListener('change', populateLabel);
+selectCity.addEventListener('change', populateLabel);
