@@ -21,8 +21,14 @@ console.log(age4);
 // ********************************** Task 3 ********************************
 
 function mul(...args) {
-    return args.reduce( (accum, arg) => { 
-        return (typeof arg === 'number') ? accum += arg : accum;
+    return args.reduce( (accum, arg, index) => { 
+        if ((typeof arg === 'number') && (accum === 0) && (index === 0)) { 
+            return arg; 
+        } else if (typeof arg === 'number') {
+            return accum *= arg;
+        } else {
+            return accum;
+        };
      }, 0);
 }
 console.log(mul(1, "str", 2, 3, true));
