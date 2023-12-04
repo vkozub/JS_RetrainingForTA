@@ -60,3 +60,17 @@ console.log(client.result);
 console.log(typeof client.result);
 
 // ********************************** Task 5 ********************************
+
+function mapBuilder(keys, values) {
+    let map = new Map();
+    for (let key = 0; key <= (keys.length - 1); ++key) {
+        map.set(keys[key], values[key]);
+    };
+    return map;
+}
+
+let keys = [1, 2, 3, 4];
+let values = ['div', 'span', 'b', 'i'];
+let map = mapBuilder(keys, values);
+console.log(map.size);
+console.log(map.get(2));
