@@ -15,9 +15,9 @@ getPromise("test promise", 2000).then(result => console.log(result));
 function calcArrProduct(arr){
     return new Promise((resolve) => {
         let product = 1;
-        for (let i in arr) {
-            if (!(typeof arr[i] === 'number')){ product = 'Error! Incorrect array!'; break;
-        } else { product *= arr[i] };
+        for (let obj of arr) {
+            if (!(typeof obj === 'number')){ product = 'Error! Incorrect array!'; break;
+        } else { product *= obj; };
         };
         resolve(product);
     });
