@@ -28,7 +28,20 @@ calcArrProduct([5, "user2", 7, 12]).then(console.log);
 
 // ********************************** Task 3 ********************************
 
+function delay(i, time) {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(i), time);
+    });
+}
 
+function showNumbers(){
+    for (let i = 0, pr = Promise.resolve(); i < 10; i++) {
+        let timeout = Math.random() * 3000;
+        pr = pr.then(() => delay(i, timeout)).then(console.log);
+    };
+}
+
+showNumbers();
 
 // ********************************** Task 4 ********************************
 
