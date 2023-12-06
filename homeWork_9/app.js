@@ -45,12 +45,12 @@ showNumbers();
 
 // ********************************** Task 4 ********************************
 
-// async function showNumbersAsync(){
-//     for (let i = 0; i < 10; i++) {
-//         let timeout = Math.random() * 3000;
-//         await delay(i, timeout);
-//         console.log(i);
-//     };
-// }
+async function showNumbersAsync(){
+    for (let i = 0; i < 10; i++) {
+        let timeout = Math.random() * 3000;
+        await delay(i, timeout);
+        console.log(i);
+    };
+}
 
-// showNumbersAsync();
+showNumbersAsync();
