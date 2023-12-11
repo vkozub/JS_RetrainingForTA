@@ -14,6 +14,3 @@ http.createServer(function (req, res) {
     res.write(`<h3>Server file name: ${path.basename(__filename)}</h3>`);
     res.end();
 }).listen(5000);
-
-// ********************************** Task 2 ********************************
-
