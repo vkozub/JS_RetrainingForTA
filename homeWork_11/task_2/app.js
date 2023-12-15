@@ -1,12 +1,27 @@
-// ********************************** Task 1 ********************************
+// ********************************** Task 2 ********************************
 
-const voteButton = document.getElementById('voteButton');
+const downloadBooks = document.getElementById('downloadBooks');
+const AUTHORS_URL = 'http://localhost:5000/authors';
 
-async function vote(event) {
-    const url = 'http://localhost:5000/voting';
-    const response = await fetch(url);
+async function getAuthors(event) {
+    const response = await fetch(AUTHORS_URL);
     const data = await response.json();
-    event.target.innerHTML = 'Your vote is accepted: ' + data.date;
+    await removeTarget(event);
+    await addListOfAuthors(data);
 }
 
-voteButton.addEventListener('click', (e) => vote(e));
+async function removeTarget(event) {
+    event.target.remove();
+}
+
+async function addListOfAuthors(data) {
+    let ul = document.createElement('ul');
+    for (let author of data.authors) { 
+        let li = document.createElement('li', author);
+        li.innerHTML = author;
+        ul.appendChild(li);
+    };
+    document.body.appendChild(ul);
+}
+
+downloadBooks.addEventListener('click', (e) => getAuthors(e));

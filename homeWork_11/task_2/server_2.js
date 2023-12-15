@@ -18,9 +18,9 @@ http.createServer(function (req, res) {
         return res.end();
     }
 
-    function votingCall() {
+    function authorsCall() {
         let data = {
-            date: (new Date()).toString()
+            authors: ['John Smith', 'John Green', 'Mark Poll', 'Adam Good', 'Simon Fennell']
         };
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.write(JSON.stringify(data));
@@ -38,8 +38,8 @@ http.createServer(function (req, res) {
     if (filePath === '/') { 
         filePath = "." + filePath + homePage;
         fs.readFile(filePath, homePageCall);
-    } else if (filePath === '/voting') {
-        votingCall();
+    } else if (filePath === '/authors') {
+        authorsCall();
     } else if (filePath === '/app.js') {
         filePath = "." + filePath;
         fs.readFile(filePath, appFile);
