@@ -37,7 +37,12 @@ console.log(newString);
 
 // ********************************** Task 5 ********************************
 
+function validateCardNumber(cardNumber) {
+    let cardPattern = /(?:\d{4}-){3}\d{4}/g;
+    return cardPattern.test(cardNumber);
+}
 
+console.log(validateCardNumber('9999-9999-9999-9999'));
 
 // ********************************** Task 6 ********************************
 
