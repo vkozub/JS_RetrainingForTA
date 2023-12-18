@@ -2,11 +2,12 @@
 
 function upperCase(str) {
     const upCasePattern = /^[A-Z]/;
-    return upCasePattern.test(str);
+    let message = upCasePattern.test(str) ? "String's starts with uppercase character" : "String's not starts with uppercase character";
+    console.log(message);
 }
 
-console.log(upperCase('regExp'));
-console.log(upperCase('RegExp'));
+upperCase('regExp');
+upperCase('RegExp');
 
 
 // ********************************** Task 2 ********************************
