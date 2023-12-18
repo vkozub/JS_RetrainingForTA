@@ -15,8 +15,8 @@ upperCase('RegExp');
 // add dot (part before @ sign) in pattern because Gmail allows it, for DSN domains only lowercase letters
 
 function checkEmail(email) {
-    const upCasePattern = /^\w+\.?\w+\@[a-z]+\.[a-z]+$/g;
-    return upCasePattern.test(email);
+    const emailPattern = /^\w+\.?\w+\@[a-z]+\.[a-z]+$/g;
+    return emailPattern.test(email);
 }
 
 console.log(checkEmail('vsevolod.kozub@gmail.com'));
