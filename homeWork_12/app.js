@@ -31,7 +31,9 @@ console.log(results);
 
 // ********************************** Task 4 ********************************
 
-
+let stringInput = "Java Script";
+let newString = stringInput.replace(/(\w+)\s(\w+)/, "$2" + " , " + "$1");
+console.log(newString);
 
 // ********************************** Task 5 ********************************
 
