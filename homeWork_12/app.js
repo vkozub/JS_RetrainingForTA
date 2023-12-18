@@ -23,7 +23,11 @@ console.log(checkEmail('vsevolod.kozub@gmail.com'));
 
 // ********************************** Task 3 ********************************
 
-
+let dLetterPattern = /d(b+)(d?)/ig;
+let string = "cdbBdbsbz";
+let matching = [...string.matchAll(dLetterPattern)][0];
+let results = matching.map(el => el);
+console.log(results);
 
 // ********************************** Task 4 ********************************
 
