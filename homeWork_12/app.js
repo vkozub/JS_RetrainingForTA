@@ -1,5 +1,12 @@
 // ********************************** Task 1 ********************************
 
+function upperCase(str) {
+    const upCasePattern = /^[A-Z]/;
+    return upCasePattern.test(str);
+}
+
+console.log(upperCase('regExp'));
+console.log(upperCase('RegExp'));
 
 
 // ********************************** Task 2 ********************************
