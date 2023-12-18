@@ -46,3 +46,15 @@ console.log(validateCardNumber('9999-9999-9999-9999'));
 
 // ********************************** Task 6 ********************************
 
+function checkEmail2(email) {
+    const emailPattern = /^[A-Za-z0-9]{1}(?:[\w]+[-]?[\w]+|[-]?[\w]+|[\w]+[-]?)\@[a-z]+\.[a-z]+$/g;
+    let message = emailPattern.test(email) ? "Email is correct!" : "Email is not correct!";
+    console.log(message);
+}
+
+checkEmail2('my_mail@gmail.com');
+checkEmail2('#my_mail@gmail.com');
+checkEmail2('my_ma--il@gmail.com');
+
+// ********************************** Task 7 ********************************
+
