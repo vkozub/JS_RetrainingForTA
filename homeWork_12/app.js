@@ -59,9 +59,12 @@ checkEmail2('my_ma--il@gmail.com');
 // ********************************** Task 7 ********************************
 
 function checkLogin(login) {
-    const loginPattern = /d/g;
-    console.log(loginPattern.test(login));
-    
+    const loginPattern = /^[A-Za-z]{1}[A-Za-z0-9.]{1,9}$/g;
+    let resultCheck =  loginPattern.test(login);
+    console.log(resultCheck);  
+    let numberPattern = /[\d]+\.?[\d]*/g;
+    let numberMatches = login.match(numberPattern);
+    console.log(numberMatches.toString());
 }
 
 checkLogin('ee1.1ret3');
