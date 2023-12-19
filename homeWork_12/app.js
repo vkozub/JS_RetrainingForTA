@@ -38,7 +38,7 @@ console.log(newString);
 // ********************************** Task 5 ********************************
 
 function validateCardNumber(cardNumber) {
-    let cardPattern = /(?:\d{4}-){3}\d{4}/g;
+    let cardPattern = /^(?:\d{4}-){3}\d{4}$/g;
     return cardPattern.test(cardNumber);
 }
 
@@ -58,3 +58,11 @@ checkEmail2('my_ma--il@gmail.com');
 
 // ********************************** Task 7 ********************************
 
+function checkLogin(login) {
+    const loginPattern = /d/g;
+    console.log(loginPattern.test(login));
+    
+}
+
+checkLogin('ee1.1ret3');
+checkLogin('ee1*1ret3');
