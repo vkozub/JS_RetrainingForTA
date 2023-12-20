@@ -42,4 +42,34 @@ describe('Task 4 - Filtering food', () => {
         const expectedFood = {kind: 'lemon', price: 50};
         expect(filterFoodPrice(food, MIN, MAX)).not.toContainEqual(expectedFood);
     });
+
+    test('Verify that the function return true value', () => {
+        expect(filterFoodPrice(food, MIN, MAX)).toBeTruthy();
+    });
+
+    test('Verify that the function return instance of Array class', () => {
+        expect(filterFoodPrice(food, MIN, MAX)).toBeInstanceOf(Array);
+    });
+
+    test('Verify that first element of filtered array have property "kind" with value "potato"', () => {
+        expect(filterFoodPrice(food, 0, MAX)[0]).toHaveProperty('kind', 'potato');
+    });
+
+    test('Verify that "kind" attribute contains only letters', () => {
+        const expectedFoodsArray = filterFoodPrice(food, MIN, MAX);
+        for (let filteredFood of expectedFoodsArray) {
+            expect(filteredFood.kind).toMatch(/^[A-Za-z]+$/);
+        };
+    });
+
+    test('Verify that "price" attribute contains only digits', () => {
+        const expectedFoodsArray = filterFoodPrice(food, MIN, MAX);
+        for (let filteredFood of expectedFoodsArray) {
+            expect(filteredFood.price.toString()).toMatch(/^\d+$/);
+        };
+    });
+
+    test('Verify that the first element does not have attribute "origin"', () => {
+        expect(filterFoodPrice(food, MIN, MAX)[0].origin).toBeFalsy();
+    });
 });
