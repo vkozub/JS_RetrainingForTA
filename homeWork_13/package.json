@@ -1,0 +1,11 @@
+{
+  "name": "homework_13",
+  "version": "1.0.0",
+  "description": "practical tasks for jest",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "vsevolod kozub",
+  "license": "ISC"
+}
