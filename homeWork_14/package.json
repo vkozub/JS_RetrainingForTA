@@ -4,12 +4,13 @@
   "description": "selenium tests",
   "main": "app.js",
   "scripts": {
-    "test_all": "mocha --recursive --timeout 10000 tests/*.*"
+    "test_all": "mocha --recursive --timeout 10000 test"
   },
   "author": "vsevolod kozub",
   "license": "ISC",
   "dependencies": {
     "selenium-webdriver": "^4.16.0",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0"
   }
 }
