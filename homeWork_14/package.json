@@ -4,13 +4,12 @@
   "description": "selenium tests",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test_all": "mocha --recursive --timeout 10000 tests/*.*"
   },
   "author": "vsevolod kozub",
   "license": "ISC",
   "dependencies": {
     "selenium-webdriver": "^4.16.0",
-    "mocha": "^10.2.0",
-    "assert": "2.1.0"
+    "mocha": "^10.2.0"
   }
 }
