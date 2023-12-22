@@ -12,14 +12,8 @@ describe('Task 2', function() {
         await driver.get('https://the-internet.herokuapp.com/hovers');
         let images = await driver.findElements(By.xpath('//div[@class="figure"]/img'));
         await driver.actions({async: true}).move({origin: images[0]}).perform();
-        let imageText = await driver.findElements(By.xpath('//div[@class="figcapture"]/h5'));
-        let text;
-        for (let img of imageText) {
-            if (await img.isDisplayed()) { text = await img.getText(); };
-            console.log(img.isDisplayed());
-        };
-        console.log(text);
-        assert.equal(text, 'name: user1', `1st image text ${text} is not equal to "name: user1"`);
+        let imageText = await driver.findElement(By.xpath('//div[@class="figcaption"]/h5')).getText();
+        assert.equal(imageText, 'name: user1', `1st image text ${imageText} is not equal to "name: user1"`);
     });
 
     afterEach(async () => driver && await driver.quit());
