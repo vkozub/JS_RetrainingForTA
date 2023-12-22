@@ -10,8 +10,9 @@ describe('Task 1', function() {
     it('Check that the 1st element of the list is inactive', async () => {
         await driver.get('https://the-internet.herokuapp.com/dropdown');
         await driver.findElement(By.id('dropdown')).click();
-        let firstOption = await driver.findElement(By.xpath('//select[@id="dropdown"]/option[@selected="selected"]')).isEnabled();
-        assert.ok(!firstOption, 'The first option of dropdown is not disabled');
+        let firstOption = await driver.findElement(By.xpath('//select[@id="dropdown"]/option[@selected="selected"]'));
+        let firstOptionActive = await firstOption.isEnabled();
+        assert.ok(!firstOptionActive, 'The first option of dropdown is not disabled');
     });
 
     it('Check that the 2nd element of the list is active', async () => {
