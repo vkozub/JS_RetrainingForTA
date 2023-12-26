@@ -4,8 +4,7 @@
   "description": "selenium tests",
   "main": "app.js",
   "scripts": {
-    "test_all": "mocha --recursive --timeout 10000 test",
-    "test4": "mocha --recursive --timeout 10000 test/task4.js"
+    "test_all": "mocha --recursive --timeout 10000 test"
   },
   "author": "vsevolod kozub",
   "license": "ISC",
