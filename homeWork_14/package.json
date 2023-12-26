@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test_all": "mocha --recursive --timeout 10000 test",
-    "test3": "mocha --recursive --timeout 10000 test/task3.js"
+    "test4": "mocha --recursive --timeout 10000 test/task4.js"
   },
   "author": "vsevolod kozub",
   "license": "ISC",
