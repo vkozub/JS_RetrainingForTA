@@ -48,3 +48,20 @@ function* rangeOfNumbers() {
 let arr6 = [];
 for (const num of rangeOfNumbers()) { arr6.push(num); }
 console.log(arr6.toString());
+
+// asynchronous generators
+console.log('******************************** async generators');
+
+async function* asyncGen(start, end) {
+    for (let i = start; i <= end; i++) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        yield i;
+    }
+}
+
+async function numbersAsync(start, end) {
+    for await (const num of asyncGen(start, end))
+        console.log(num);
+}
+
+numbersAsync(0, 7);
