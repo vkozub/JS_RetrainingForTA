@@ -1,6 +1,6 @@
 const path = require('node:path');
 const fs = require('node:fs/promises');
-const { Buffer, constants } = require('node:buffer');
+const { Buffer } = require('node:buffer');
 
 (async (testDirPath) => {
 
@@ -61,9 +61,11 @@ const { Buffer, constants } = require('node:buffer');
 
     // Copy the file
     const copyFileName = path.join(testDirPath, fileName);
+    const copyFileName2 = path.join(testDirPath, 'file2.txt');
     try {
         await fs.access(filePath, fs.constants.R_OK);
         await fs.copyFile(filePath, copyFileName);
+        await fs.copyFile(filePath, copyFileName2);
         console.log('File has been copied successfully.');
     } catch (error) {
         console.log('File cannot be copied: ', error)
@@ -77,67 +79,75 @@ const { Buffer, constants } = require('node:buffer');
     //     console.log('Dir was not copied: ', error)
     // }
 
-    // Create new link from file path
-    // await fs.link(filePath, './linkNew');
-    // console.log(await fs.lstat('./linkNew'));
+    // Open directory
+    // try {
+    //     const dir = await fs.opendir(baseDir, { recursive: true });
+    //     for await (const dirent of dir)
+    //         console.log(dirent.name);
+    // } catch (err) {
+    //     console.error(err);
+    // }
+
+    // Read directory
+    try {
+        const dir = await fs.readdir(baseDir, { recursive: true, withFileTypes: true });
+        for (const dirent of dir) {
+            console.log(dirent);
+            if (dirent.isFile()) {
+                const fileContent = await fs.readFile(path.join(dirent.parentPath, dirent.name), { encoding: 'utf8' });
+                console.log(`File ${path.join(dirent.parentPath, dirent.name)} content:\n`, fileContent);
+            } else if (dirent.isDirectory()) {
+                console.log('Directory name is: ', dirent.name);
+            }
+        }
+    } catch (err) {
+        console.error(err);
+    }
     
+    // Create new HARD link from file path
+    // await fs.link(filePath, './linkNew');
+    // console.log('Link statistics:\n', await fs.lstat('./linkNew'));
 
-// console.log('Using realpathSync: ', fs.realpathSync('test/file.txt'));
+    // Create new SYM link from file path
+    await fs.symlink(filePath, './linkNew');
+    console.log('Link statistics:\n', await fs.lstat('./linkNew'));
 
-// Read the file
-// let fd;
-// try {
-//     fs.accessSync(filePath, fs.constants.R_OK);
-//     const data = fs.readFileSync(filePath, { encoding: 'utf8' });
-//     console.log(data);
+    // Read SYM link content
+    const linkTarget = await fs.readlink('./linkNew');
+    console.warn(linkTarget);
 
-//     fd = fs.openSync(filePath, 'r');
-//     const fileBuf = Buffer.alloc(256);
-//     fs.readSync(fd, fileBuf);
-//     console.log('New buffer after reading:\n', fileBuf.toString());
+    // Unlink SYM link from file path
+    try {
+        await fs.unlink('./linkNew');
+        console.log('Unlinked successfully.');
+    } catch (e) {
+        console.error(e);
+    }
 
-//     console.log(fs.fstatSync(fd));
-//     console.log(fs.statSync('test'));
-//     console.log(fs.statfsSync(filePath));
-// } catch(err) {
-//     console.error("File is not opened for reading");
-// } finally {
-//     if (fd !== undefined)
-//         fs.closeSync(fd);
-// }
+    // Using realpath
+    try {
+        await fs.realpath(filePath);
+        console.log('Path is real.');
+    } catch (e) {
+        console.error(e);
+    }
 
-// Create symbolic link
-// fs.symlinkSync('test/dir1/file.txt', 'symlink.txt');
+    // Remove empty directory
+    try {
+        await fs.unlink(copyFileName);
+        await fs.unlink(copyFileName2);
+        await fs.rmdir(testDirPath);
+        console.log('Directory was removed successfully.');
+    } catch (e) {
+        console.error(e);
+    }
 
-// Unlink the link
-// fs.unlinkSync('symlink.txt');
-// Unlink the file
-// fs.unlinkSync('test/dir1/file.txt');
+    // Remove directory recursively
+    try {
+        await fs.rm(baseDir, { recursive: true, force: true });
+        console.log('Directory was recursively removed successfully.');
+    } catch (e) {
+        console.error(e);
+    }
 
-// Open the directory
-// const dirObject = fs.opendirSync(baseDir, { recursive: true });
-// // console.log(dirObject.entries());
-// async function iterateDir() {
-//     for await (const dirEnt of dirObject) {
-//         if (dirEnt.isDirectory()) {
-//             console.log('Directory: ', dirEnt.name);
-//             // console.log(dirObject.readSync().name);
-//         } else
-//             console.log('File: ', dirEnt.name);
-//     }
-// }
-
-// iterateDir();
-// dirObject.closeSync();
-
-// Read the dir content
-// console.log(fs.readdirSync(baseDir, { recursive: true }));
-
-// Copy the directory
-// const copyDirName = path.join('testCopyDir');
-// fs.cpSync(baseDir, copyDirName, { recursive: true });
-
-// Remove the test directory
-// fs.rmSync(baseDir, { recursive: true, force: true });
-// fs.rmSync(copyDirName, { recursive: true, force: true });
 })('test/dir1');
