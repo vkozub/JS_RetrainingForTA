@@ -2,10 +2,9 @@ const path = require('node:path');
 const fs = require('node:fs/promises');
 const { Buffer, constants } = require('node:buffer');
 
-(async () => {
+(async (testDirPath) => {
 
     // Get path as Buffer object
-    const testDirPath = 'test/dir1';
     const testDirBuf = Buffer.from(testDirPath);
 
     // Create a test directory with sub directories
@@ -46,38 +45,44 @@ const { Buffer, constants } = require('node:buffer');
 
     await writeFileAsync(filePath, fileData);
 
+    // Truncate the file
+    await fs.truncate(filePath);
 
+    // verify whether file is accessible and append data to it
     try {
         await fs.access(filePath, fs.constants.R_OK | fs.constants.W_OK);
         console.log('Can access created file.');
+        const fileData3 = 'Append data to the new file by descriptor.\n';
+        await fs.appendFile(filePath, fileData3);
+        console.log('Data has been added to the file successfully.');
     } catch (error) {
         console.log('Cannot access: ', error)
     }
 
+    // Copy the file
+    const copyFileName = path.join(testDirPath, fileName);
+    try {
+        await fs.access(filePath, fs.constants.R_OK);
+        await fs.copyFile(filePath, copyFileName);
+        console.log('File has been copied successfully.');
+    } catch (error) {
+        console.log('File cannot be copied: ', error)
+    }
+
+    // Copy whole directory recursively
+    // try {
+    //     await fs.cp(baseDir, './testCopy', { recursive: true });
+    //     console.log('Dir has been copied successfully.');
+    // } catch (error) {
+    //     console.log('Dir was not copied: ', error)
+    // }
+
+    // Create new link from file path
+    // await fs.link(filePath, './linkNew');
+    // console.log(await fs.lstat('./linkNew'));
+    
+
 // console.log('Using realpathSync: ', fs.realpathSync('test/file.txt'));
-
-// fs.truncateSync(baseDir + '/' + 'file.txt');
-
-// Open a file in the test directory
-// const fileDescriptor = fs.openSync(filePath, 'w');
-// console.log(fileDescriptor);
-
-// Write file again using file descriptor
-// const fileData2 = 'Write data to the new file by descriptor.\n';
-// const fileData2Buf = Buffer.from(fileData2);
-// console.log(fs.writeSync(fileDescriptor, fileData2Buf));
-// fs.closeSync(fileDescriptor);
-
-// Copy the file
-// const copyFileName = path.join(testDirPath, fileName);
-// fs.copyFileSync(filePath, copyFileName);
-
-// Append the file
-// if (fs.existsSync(filePath)) {
-//     const fileData3 = 'Append data to the new file by descriptor.\n';
-//     fs.appendFileSync(filePath, fileData3);
-// } else 
-//     console.log("File does not exist");
 
 // Read the file
 // let fd;
@@ -135,4 +140,4 @@ const { Buffer, constants } = require('node:buffer');
 // Remove the test directory
 // fs.rmSync(baseDir, { recursive: true, force: true });
 // fs.rmSync(copyDirName, { recursive: true, force: true });
-})();
+})('test/dir1');
