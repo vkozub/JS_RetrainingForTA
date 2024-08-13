@@ -41,5 +41,18 @@ const { Buffer } = require('node:buffer');
         console.error('File was not written! Error is: ', err.message);
     }
     
+    // Truncate the file
+    try {
+        fs.access(filePath, fs.constants.W_OK | fs.constants.R_OK, err => {
+            if (err) throw(err);
+            console.log('File is accessible.');
+        });
+        fs.truncate(filePath, err => {
+            if (err) throw(err);
+            console.log('File hase been truncated.');
+        });
+    } catch (err) {
+        console.log('File has not been truncated. Error is: ', err);
+    }
 
 })('test/dir1');
