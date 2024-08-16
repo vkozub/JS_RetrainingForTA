@@ -88,4 +88,203 @@ const { Buffer } = require('node:buffer');
 
     await appendFile(filePath, fileDataAppend);
 
+    // Copy the file
+    const copyFileName = path.join(testDirPath, 'file2.txt');
+
+    async function copyFile(src, dest) {
+        return new Promise((resolve, _) => {
+            fs.copyFile(src, dest, function (err) {
+                if (err) 
+                    console.error(`File "${src}" has not been copied. Error is: `, err.message);
+                else 
+                    console.log(`File "${src}" copied successfully to "${dest}".`);
+                resolve();
+            });
+        });
+    }
+
+    await copyFile(filePath, copyFileName);
+
+    // Copy entire directory
+    async function copyEntireDirectory(src, dest, options = { recursive: true }) {
+        return new Promise((resolve, _) => {
+            fs.cp(src, dest, { ...options }, function (err) {
+                if (err) 
+                    console.error(`Directory "${src}" has not been copied. Error is: `, err.message);
+                else 
+                    console.log(`Directory "${src}" copied successfully to "${dest}".`);
+                resolve();
+            });
+        });
+    }
+
+    await copyEntireDirectory(baseDir, './testCopy');
+
+    // Remove entire directory
+    async function removeEntireDirectory(src, options = { recursive: true, force: true }) {
+        return new Promise((resolve, _) => {
+            fs.rm(src, { ...options }, function (err) {
+                if (err) 
+                    console.error(`Directory "${src}" has not been removed. Error is: `, err.message);
+                else 
+                    console.log(`Directory "${src}" removed successfully.`);
+                resolve();
+            });
+        });
+    }
+
+    await removeEntireDirectory('./testCopy');
+
+    // Rename the existing file
+    async function renameFile(oldPath, newPath) {
+        return new Promise((resolve, _) => {
+            fs.rename(oldPath, newPath, function (err) {
+                if (err) 
+                    console.error(`File "${oldPath}" has not been renamed. Error is: `, err.message);
+                else 
+                    console.log(`File "${oldPath}" renamed to "${newPath}" successfully.`);
+                resolve();
+            });
+        });
+    }
+
+    await renameFile(copyFileName, testDirPath + '/rename.txt');
+
+    // Remove the existing file
+    async function unlinkFile(path) {
+        return new Promise((resolve, _) => {
+            fs.unlink(path, function (err) {
+                if (err) 
+                    console.error(`File "${path}" has not been removed. Error is: `, err.message);
+                else 
+                    console.log(`File "${path}" removed successfully.`);
+                resolve();
+            });
+        });
+    }
+
+    // await unlinkFile(testDirPath + '/rename.txt');
+
+    // Remove empty dir
+    async function removeDir(path) {
+        return new Promise((resolve, _) => {
+            fs.rmdir(path, function (err) {
+                if (err) 
+                    console.error(`Directory "${path}" has not been removed. Error is: `, err.message);
+                else 
+                    console.log(`Directory "${path}" removed successfully.`);
+                resolve();
+            });
+        });
+    }
+
+    // await removeDir(testDirPath);
+
+    // Read contents
+    async function readFile(path) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(path, { encoding: 'utf8' }, function (err, data) {
+                if (err) {
+                    console.error(`File "${path}" has not been read. Error is: `, err.message);
+                    reject(err);
+                }
+                resolve(data);
+            });
+        });
+    }
+
+    // Close the file
+    async function closeFile(fd) {
+        return new Promise((resolve, reject) => {
+            fs.close(fd, function (err) {
+                if (err) {
+                    console.error(`File "${fd}" has not been closed. Error is: `, err.message);
+                    reject(err);
+                }
+                console.log('File was closed successfully.')
+                resolve();
+            });
+        });
+    }
+
+    // Get file stats
+    async function getFileStats(fd) {
+        return new Promise((resolve, reject) => {
+            fs.fstat(fd, function (err, stats) {
+                if (err) {
+                    console.error(`Cannot get file "${fd}" statistics. Error is: `, err.message);
+                    reject(err);
+                }
+                resolve(stats);
+            });
+        });
+    }
+
+
+    async function readFileContent(path) {
+        return new Promise((resolve, reject) => {
+            fs.open(path, function (err, fd) {
+                if (err) {
+                    console.error(`File "${path}" could not be opened. Error is: `, err.message);
+                    reject(err);
+                };
+                const statsPromise = getFileStats(fd);
+                statsPromise.then((stats) => console.log('File statistics is:\n', stats))
+                    .catch((err) => reject(err));
+                const promise = readFile(fd);
+                promise.then((data) => resolve(data))
+                    .catch((err) => reject(err))
+                    .finally(() => closeFile(fd));
+            });
+        });
+    }
+
+    try {
+        const fileContent = await readFileContent(filePath);
+        console.log(`File content: "${fileContent}"`);
+    } catch (err) {
+        console.error('There is no file content. There is an error: ', err.message);
+    }
+    
+    // Open the directory
+    async function getDirContents(path, options = { recursive: false }) {
+        return new Promise((resolve, reject) => {
+            fs.opendir(path, { ...options }, function (err, dir) {
+                if (err) {
+                    console.error(`Cannot open dir "${path}". Error is: `, err.message);
+                    reject(err);
+                }
+                resolve(dir);
+            });
+        });
+    }
+
+    try {
+        const dirContent = await getDirContents(baseDir, { recursive: true });
+        for await (const dirent of dirContent)
+            console.log(dirent.name);
+    } catch (err) {
+        console.error('Dir cannot be opened. There is an error: ', err.message);
+    }
+
+    // Read directory contents
+    async function readDirContent(path, options) {
+        return new Promise((resolve, reject) => {
+            fs.readdir(path, { ...options }, function (err, files) {
+                if (err) {
+                    console.error(`Cannot read dir "${path}". Error is: `, err.message);
+                    reject(err);
+                }
+                resolve(files);
+            });
+        });
+    }
+
+    try {
+        const dirFiles = await readDirContent(baseDir, { recursive: true, withFileTypes: true });
+        console.log(dirFiles);
+    } catch (err) {
+        console.error('Dir cannot be read. There is an error: ', err.message);
+    }
+
 })('test/dir1');
