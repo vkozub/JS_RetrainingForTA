@@ -287,4 +287,114 @@ const { Buffer } = require('node:buffer');
         console.error('Dir cannot be read. There is an error: ', err.message);
     }
 
+    // Get real path
+    async function getRealPath(path) {
+        return new Promise((resolve, reject) => {
+            fs.realpath(path, function (err, resolvedPath) {
+                if (err) {
+                    console.error(`Cannot resolve "${path}" to a real one.`);
+                    reject(err);
+                }
+                resolve(resolvedPath);
+            });
+        });
+    }
+
+    try {
+        const realPath = await getRealPath('../test');
+        console.log('Real path is: ', realPath);
+    } catch (err) {
+        console.error(err);
+    }
+
+    // Create read stream
+    async function getFileStream(path) {
+        const streamArray = [];
+    
+        return new Promise((resolve, reject) => {
+            const readStream = fs.createReadStream(path, { highWaterMark: 1 });
+    
+            readStream.on('open', function (fd) {
+                console.log('Open stream: ', fd);
+            }).on('ready', function () {
+                console.log('Stream is ready.');
+            }).on('data', function (chunk) {
+                console.log('Chunk is: ', chunk.toString());
+                streamArray.push(chunk.toString());
+            }).on('end', function () {
+                console.log('End of stream.');
+                console.log('Path is: ', readStream.path);
+                console.log('Bits read: ', readStream.bytesRead);
+                resolve(streamArray);
+            }).on('close', function () {
+                console.log('Close stream.');
+            }).on('error', function (err) {
+                reject(err);
+            });
+            
+        });
+    }
+
+    const result = await getFileStream(filePath);
+    console.log('Stream array is: ', result);
+
+    // Create write stream
+    const readStream = fs.createReadStream(filePath, { highWaterMark: 1 });
+    const writeStream = fs.createWriteStream('./test/dir1/rename.txt', { highWaterMark: 2, flags: 'a' });
+    // readStream.pipe(writeStream);
+
+    async function writeFileStreamFromReadStream(readStream, writeStream) {
+        return new Promise((resolve, reject) => {
+            readStream.pipe(writeStream).on('open', function (fd) {
+                    console.log('Open write stream: ', fd);
+                }).on('ready', function () {
+                    console.log('Write stream is ready.');
+                }).on('pipe', function (src) {
+                    console.log('There is a piping.');
+                    console.log('Write chunk is: ', src.toString());
+                }).on('finish', function () {
+                    console.log('Finish of write stream.');
+                    console.log('Path is: ', writeStream.path);
+                    console.log('Bits written: ', writeStream.bytesWritten);
+                    resolve();
+                }).on('close', function () {
+                    console.log('Close write stream.');
+                }).on('error', function (err) {
+                    reject(err);
+                });
+        });
+    }
+
+    await writeFileStreamFromReadStream(readStream, writeStream);
+
+    async function writeFileStream(path, data, options = { highWaterMark: 2, flags: 'a' }) {
+        const writeStream = fs.createWriteStream(path, { ...options });
+
+        return new Promise((resolve, reject) => {
+            writeStream.on('open', function (fd) {
+                    console.log('Open the second write stream: ', fd);
+                }).on('ready', function () {
+                    console.log('Write the second stream is ready.');
+                }).on('pipe', function (src) {
+                    console.log('There is a the second stream piping.');
+                    console.log('Write chunk is: ', src.toString());
+                }).on('finish', function () {
+                    console.log('Finish of the second write stream.');
+                    console.log('Path is: ', writeStream.path);
+                    console.log('Bits written: ', writeStream.bytesWritten);
+                    resolve();
+                }).on('close', function () {
+                    console.log('Close the second write stream.');
+                }).on('error', function (err) {
+                    reject(err);
+            });
+
+            writeStream.write(data);
+            writeStream.end();
+        });
+    }
+
+    const dataToWrite = 'Write stream to the file (append).\n';
+    await writeFileStream('./test/dir1/rename.txt', dataToWrite);
+
 })('test/dir1');
