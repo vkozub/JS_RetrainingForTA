@@ -390,7 +390,7 @@ const { Buffer } = require('node:buffer');
             });
 
             writeStream.write(data);
-            writeStream.end();
+            writeStream.end('End of the stream.\n');
         });
     }
 
