@@ -400,7 +400,4 @@ const { Buffer } = require('node:buffer');
     const dataToWrite = 'Write stream to the file (append).\n';
     await writeFileStream('./test/dir1/rename.txt', dataToWrite);
 
-    // Pipe two writestreams
-    
-
 })('test/dir1');
