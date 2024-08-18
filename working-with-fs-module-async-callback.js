@@ -338,36 +338,42 @@ const { Buffer } = require('node:buffer');
     const result = await getFileStream(filePath);
     console.log('Stream array is: ', result);
 
-    // Create write stream
+    // Create write stream via PIPING
     const readStream = fs.createReadStream(filePath, { highWaterMark: 1 });
     const writeStream = fs.createWriteStream('./test/dir1/rename.txt', { highWaterMark: 2, flags: 'a' });
-    // readStream.pipe(writeStream);
 
     async function writeFileStreamFromReadStream(readStream, writeStream) {
+        console.log('\nThere is a PIPING:\n');
+
         return new Promise((resolve, reject) => {
-            readStream.pipe(writeStream).on('open', function (fd) {
-                    console.log('Open write stream: ', fd);
-                }).on('ready', function () {
-                    console.log('Write stream is ready.');
-                }).on('pipe', function (src) {
-                    console.log('There is a piping.');
-                    console.log('Write chunk is: ', src.toString());
-                }).on('finish', function () {
-                    console.log('Finish of write stream.');
-                    console.log('Path is: ', writeStream.path);
-                    console.log('Bits written: ', writeStream.bytesWritten);
-                    resolve();
-                }).on('close', function () {
-                    console.log('Close write stream.');
-                }).on('error', function (err) {
-                    reject(err);
+            writeStream.on('open', function (fd) {
+                console.log('Open write stream: ', fd);
+            }).on('ready', function () {
+                console.log('Write stream is ready.');
+            }).on('pipe', function (src) {
+                console.log('There is a write stream piping.');
+                src.on('data', function (chunk) {
+                    console.log('Data fromm piping: ', chunk.toString());
                 });
+            }).on('finish', function () {
+                console.log('Finish of write stream.');
+                console.log('Path is: ', writeStream.path);
+                console.log('Bits written: ', writeStream.bytesWritten);
+                resolve(writeStream);
+            }).on('close', function () {
+                console.log('Close write stream.');
+            }).on('error', function (err) {
+                reject(err);
+            });
+
+            readStream.pipe(writeStream);
         });
     }
 
     await writeFileStreamFromReadStream(readStream, writeStream);
 
     async function writeFileStream(path, data, options = { highWaterMark: 2, flags: 'a' }) {
+        console.log('\nThere is WRITESTREAM:\n');
         const writeStream = fs.createWriteStream(path, { ...options });
 
         return new Promise((resolve, reject) => {
@@ -375,9 +381,6 @@ const { Buffer } = require('node:buffer');
                     console.log('Open the second write stream: ', fd);
                 }).on('ready', function () {
                     console.log('Write the second stream is ready.');
-                }).on('pipe', function (src) {
-                    console.log('There is a the second stream piping.');
-                    console.log('Write chunk is: ', src.toString());
                 }).on('finish', function () {
                     console.log('Finish of the second write stream.');
                     console.log('Path is: ', writeStream.path);
