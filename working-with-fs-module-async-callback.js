@@ -325,9 +325,9 @@ const { Buffer } = require('node:buffer');
                 console.log('End of stream.');
                 console.log('Path is: ', readStream.path);
                 console.log('Bits read: ', readStream.bytesRead);
-                resolve(streamArray);
             }).on('close', function () {
-                console.log('Close stream.');
+                console.log('Close read stream.');
+                resolve(streamArray);
             }).on('error', function (err) {
                 reject(err);
             });
@@ -359,9 +359,9 @@ const { Buffer } = require('node:buffer');
                 console.log('Finish of write stream.');
                 console.log('Path is: ', writeStream.path);
                 console.log('Bits written: ', writeStream.bytesWritten);
-                resolve(writeStream);
             }).on('close', function () {
                 console.log('Close write stream.');
+                resolve(writeStream);
             }).on('error', function (err) {
                 reject(err);
             });
@@ -385,9 +385,9 @@ const { Buffer } = require('node:buffer');
                     console.log('Finish of the second write stream.');
                     console.log('Path is: ', writeStream.path);
                     console.log('Bits written: ', writeStream.bytesWritten);
-                    resolve();
                 }).on('close', function () {
                     console.log('Close the second write stream.');
+                    resolve(writeStream);
                 }).on('error', function (err) {
                     reject(err);
             });
